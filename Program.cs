@@ -5,6 +5,15 @@ namespace AdventOfCode
 {
     internal class Program
     {
+        public static string ReverseString(string S)
+        {
+            string RevS = "";
+            for (int i = S.Length -1; i > 0; i--)
+            {
+                RevS += S[i];
+            }
+            return RevS;
+        }
         static void Main(string[] args)
         {
             int total = 0;
@@ -40,56 +49,45 @@ namespace AdventOfCode
                             Numeric += line[i];
                             break;
                         }
-                    }
-
-                    Number = "";
-                    foundword = false;
-
-                    for (int i = )
-                    {
-                        Number += line[i];
-                        for (int j = 0; j < words.Length; j++)
+                        line = ReverseString(line);
+                        Number = "";
+                        foundword = false;
+                        for (int h = 0; h < line.Length; h++)
                         {
-                            if (Number.Contains(words[j]))
+                            Number += line[h];
+                            for (int j = 0; j < words.Length; j++)
                             {
-                                Numeric += digits[j];
-                                foundword = true;
+                                if (Number.Contains(RevWords[j]))
+                                {
+                                    Numeric += digits[j];
+                                    foundword = true;
+                                    break;
+                                }
+                            }
+                            if (foundword)
+                            {
+                                break;
+                            }
+                            if (char.IsDigit(line[h]))
+                            {
+                                Numeric += line[h];
                                 break;
                             }
                         }
-                        if (foundword)
-                        {
-                            break;
-                        }
-                        if (char.IsDigit(line[i]))
-                        {
-                            Numeric += line[i];
-                            break;
-                        }
-                    }
 
-                    if (Numeric.Length == 2)
-                    {
-                        string Num = "";
-                        Num += Numeric[0];
-                        Num += Numeric[1];
-                        Console.WriteLine(Num);
-                        total += int.Parse(Num);
-                    }
-                    else
-                    {
-                        string Num = "";
-                        Num += Numeric[0];
-                        Num += Numeric[0];
-                        Console.WriteLine(Num);
-                        total += int.Parse(Num);
-
+                        if (Numeric.Length == 2)
+                        {
+                            string Num = "";
+                            Num += Numeric[0];
+                            Num += Numeric[1];
+                            Console.WriteLine(Num);
+                            total += int.Parse(Num);
+                        }
                     }
                 }
+                Console.WriteLine(total);
+                Console.ReadKey();
             }
-            Console.WriteLine(total);
-            Console.ReadKey();
         }
     }
 }
-
